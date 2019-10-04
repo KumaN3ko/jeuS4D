@@ -1,0 +1,153 @@
+{% extends 'base.html.twig' %}
+
+
+
+
+{% block body %}
+    <p>{{ tour }}</p>
+    <p>{{ user }}</p>
+    
+<div id="plateau">
+    <div class="mainJ2">
+        {% for idCarte in  mainJ2 %}
+            <div class="carteMain"
+                 style="background-color:{{ cartes[idCarte].couleur }};">{{ cartes[idCarte].puissance }}</div>
+        {% endfor %}
+    </div>
+    <div class="tuilesJ2">
+        {% for i in 1..9 %}
+            <div class="tuile">-</div>
+        {% endfor %}
+    </div>
+    <div class="cartesJ2">
+        {% for j in 1..3 %}
+            <div class="ligne">
+                {% for i in 1..9 %}
+                    <div class="carte droppable" data-ligne="{{ j }}" data-colonne="{{ i }}">-</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="tuiles">
+        {% for i in 1..9 %}
+            <div class="tuile">Tuile {{ i }}</div>
+        {% endfor %}
+    </div>
+    <div class="cartesJ1">
+        {% for j in 1..3 %}
+            <div class="ligne">
+                {% for i in 1..9 %}
+                    <div class="carte droppable" data-ligne="{{ j }}" data-colonne="{{ i }}">-</div>
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="tuilesJ2">
+        {% for i in 1..9 %}
+            <div class="tuile ">-</div>
+        {% endfor %}
+    </div>
+    <div class="mainJ1"><br>
+        {% for idCarte in  mainJ1 %}
+            <div class="carteMain draggable"
+                 data-carte="{{ cartes[idCarte].id }}"
+                 style="background-color:{{ cartes[idCarte].couleur }};">
+                {{ cartes[idCarte].puissance }}
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock body %}
+
+
+
+    {% block javascripts %}
+
+
+
+
+        {#condition pour connaitre le joueur actif et lier le tour au joueur  (necessité de transformer le joueur1 en pseudo lié à l'id)  #}
+        {#{% if joueur1 == user %}#}
+
+            {% if tour == 1 %}
+                {{ parent() }}
+                <script>
+                    $( function() {
+                        $( ".draggable" ).draggable({ revert: 'invalid' });
+                        $( ".droppable" ).droppable({
+                            accept: ".draggable",
+                            classes: {
+                                "ui-droppable-active": "ui-state-active",
+                                "ui-droppable-hover": "ui-state-hover"
+                            },
+                            drop: function( event, ui ) {
+                                $(this).addClass("ui-state-highlight")
+                                $('.draggable').removeClass("draggable", "ui-state-active")
+                                $('.ui-state-active').removeClass("ui-state-active")
+
+                                console.log('je viens de dropper')
+                                $.ajax({
+                                    url: "{{ path('depose_carte', {idPartie:partie.id }) }}",
+                                    method: 'POST',
+                                    data: {
+                                        carte: ui.draggable.data('carte'),//data-carte dans le HTML pour chaque carte
+                                        colonne: $(this).data('colonne'), //colonne du plateau de jeu data-colonne
+                                        ligne: $(this).data('ligne') //ligne du plateau de jeu data-ligne
+                                    },
+
+                                    success: function(){
+
+                                    }
+                                })
+
+                            }
+                        });
+                    } );
+                </script>
+            {% endif %}
+
+        {#{% endif %}#}
+
+
+        {#condition pour connaitre le joueur actif et lier le tour au joueur (necessité de transformer le joueur1 en pseudo lié à l'id) #}
+        {#{% if joueur2 == user %}#}
+
+            {#{% if tour == 2 %}#}
+                {#{{ parent() }}#}
+                {#<script>#}
+                    {#$( function() {#}
+                        {#$( ".draggable" ).draggable({ revert: 'invalid' });#}
+                        {#$( ".droppable" ).droppable({#}
+                            {#accept: ".draggable",#}
+                            {#classes: {#}
+                                {#"ui-droppable-active": "ui-state-active",#}
+                                {#"ui-droppable-hover": "ui-state-hover"#}
+                            {#},#}
+                            {#drop: function( event, ui ) {#}
+                                {#$(this).addClass("ui-state-highlight")#}
+                                {#$.ajax({#}
+                                    {#url: "{{ path('depose_carte', {idPartie:partie.id }) }}",#}
+                                    {#method: 'POST',#}
+                                    {#data: {#}
+                                        {#carte: ui.draggable.data('carte'),//data-carte dans le HTML pour chaque carte#}
+                                        {#colonne: $(this).data('colonne'), //colonne du plateau de jeu data-colonne#}
+                                        {#ligne: $(this).data('ligne') //ligne du plateau de jeu data-ligne#}
+                                    {#},#}
+
+                                    {#success: function(){#}
+
+                                    {#}#}
+                                {#})#}
+
+                            {#}#}
+                        {#});#}
+                    {#} );#}
+                {#</script>#}
+            {#{% endif %}#}
+
+        {#{% endif %}#}
+
+    {% endblock %}
+
+

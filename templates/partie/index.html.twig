@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PartieController!{% endblock %}
+
+{% block body %}
+    <div>
+    <h1>Créer une partie</h1>
+    <form action="{{ path('nouvelle_partie') }}" method="POST">
+        <div class="form-group">
+            <label for="adversaire">Choisir l'adversaire</label>
+            <select name="adversaire" id="adversaire" class="form-control">
+                <option value="">Choisir l'adversaire</option>
+                {% for joueur in joueurs if joueur.username != app.user.username %}
+                    <option value="{{ joueur.id }}">{{ joueur.username }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary">Créer la partie</button>
+        </div>
+    </form>
+    </div>
+    <div>
+        <h1>Liste des parties</h1>
+        <ul>
+
+            {% for partie in parties[0] %}
+
+                <li><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Accéder à la partie contre {{ partie.joueur2.username }}</li>
+            {% endfor %}
+            {% for partie in parties[1] %}
+
+                <li><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Accéder à la partie contre {{
+                    partie.joueur1.username }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
