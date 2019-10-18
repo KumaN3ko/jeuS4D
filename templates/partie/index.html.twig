@@ -1,38 +1,169 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello PartieController!{% endblock %}
+{% block stylesheets %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
+    <link rel="shortcut icon" href="{{ asset('assets/images/logo.svg') }}">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+{% endblock %}
 
 {% block body %}
-    <div>
-    <h1>Créer une partie</h1>
-    <form action="{{ path('nouvelle_partie') }}" method="POST">
-        <div class="form-group">
-            <label for="adversaire">Choisir l'adversaire</label>
-            <select name="adversaire" id="adversaire" class="form-control">
-                <option value="">Choisir l'adversaire</option>
-                {% for joueur in joueurs if joueur.username != app.user.username %}
-                    <option value="{{ joueur.id }}">{{ joueur.username }}</option>
-                {% endfor %}
-            </select>
+    <div class="container">
+
+
+        <!--HEADER-->
+
+        <header id="header">
+            <div class="logo center_div2"><img src="{{ asset('assets/images/jeu_logo.png') }}" alt="logo"/></div>
+        </header>
+
+        <!--FIN HEADER-->
+        <!--BOUTON JOUER-->
+
+        <div class="jouer center_div2">
+            <img src="{{ asset('assets/images/fleche_gauche.png') }}" alt="fleche gauche"/>
+            <button type="button" class="btn btn-danger btn-decouvrir">JOUER</button>
+            <img src="{{ asset('assets/images/fleche_droite.png') }}" alt="fleche droite"/>
         </div>
-        <div>
-            <button type="submit" class="btn btn-primary">Créer la partie</button>
+
+        <!--FIN BOUTON JOUER-->
+        <!--INFORMATIONS PERSONNAGE-->
+
+        <div class="infos center_div2">
+            <div class="infos_container">
+                <div class="row infosl1">
+                    <span class="pseudo">Pseudo</span>
+                    <span class="nbparties">Nombre de parties jouées : XX</span>
+                </div>
+                <div class="row infosl2">
+                    <img src="{{ asset('assets/images/jeu_bebe.png') }}" alt="image de bébé" class="infos_img"/>
+                    <div class="stats">
+                        <div class="row stats1">
+                            <span class="winloss">Victoires</span>
+                            <span class="winloss">Défaites</span>
+                        </div>
+                        <div class="row stats2">
+                            <img src="{{ asset('assets/images/fleche_victoire.png') }}" alt="fleche gauche"/>
+                            <span class="win">23</span>
+                            <img src="{{ asset('assets/images/fleche_defaite.png') }}" alt="fleche droite"/>
+                            <span class="loss">18</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
-    </div>
-    <div>
-        <h1>Liste des parties</h1>
-        <ul>
 
-            {% for partie in parties[0] %}
+        <!--FIN INFORMATIONS PERSONNAGE-->
 
-                <li><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Accéder à la partie contre {{ partie.joueur2.username }}</li>
-            {% endfor %}
-            {% for partie in parties[1] %}
 
-                <li><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Accéder à la partie contre {{
-                    partie.joueur1.username }}</li>
-            {% endfor %}
-        </ul>
+
+        <!--LISTE DES PARTIES-->
+
+        <div class="parties">
+            <div class="parties_gauche">
+                <h2>Listes des parties en cours</h2>
+                <img src="{{ asset('assets/images/fleche_noire.png') }}" alt="fleche noire" class="delimiteur"/>
+
+                <div class="thead">
+                    <span>Partie</span>
+                    <span>Joueur</span>
+                    <span>Cours</span>
+                </div>
+
+                <!--BOUCLE PARTIES EN COURS-->
+
+                <div class="tbody">
+
+                    {% for partie in parties[0] %}
+                        <div class="parties_partie"><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Acceder</a></div>
+                        <div class="parties_joueur">{{ partie.joueur2.username }}</div>
+                        <div class="parties_cours">7</div>
+                    {% endfor %}
+
+                </div>
+
+
+                <!--FIN BOUCLE PARTIES EN COURS-->
+
+            </div>
+            <div class="parties_droite">
+
+
+                <h2 >Créer une partie</h2>
+                <form action="{{ path('nouvelle_partie') }}" method="POST">
+                    <div class="form-group">
+                        <label for="adversaire">Choisir l'adversaire</label>
+                        <select name="adversaire" id="adversaire" class="form-control">
+                            <option value="">Choisir l'adversaire</option>
+                            {% for joueur in joueurs if joueur.username != app.user.username %}
+                                <option value="{{ joueur.id }}">{{ joueur.username }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-danger btn-decouvrir">Créer la partie</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!--FIN LISTE DES PARTIES-->
+
+
+        <!--FOOTER-->
+
+        <footer>
+            <div class="container jeu_footer">
+                <div class="row">
+                    <div class="col-lg-12 center_div2 mb-4">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="logo_nav"/>
+                    </div>
+                </div>
+
+                <div class="row mt-4 center_div2">
+                    <div class="col-lg-4 center_div4">
+                        <p>Templar order</p>
+                        <ul>
+                            <li v-if="language=='fr'" class="footer_li_centered"><a href="#header">Accueil</a></li>
+                            <li v-if="language=='en'" class="footer_li_centered"><a href="#header">Home</a></li>
+                            <li class="footer_li_centered"><a href="../">Agence DATA</a></li>
+                            <li v-if="language=='fr'" class="footer_li_centered"><a href="../promo">Site officiel</a></li>
+                            <li v-if="language=='en'" class="footer_li_centered"><a href="../promo">Official website</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 center_div4">
+                        <p v-if="language=='fr'">Réseaux sociaux</p>
+                        <p v-if="language=='en'">Social media</p>
+                        <ul>
+                            <li><a href="#"><img src="{{ asset('assets/images/fb.svg') }}" class="mr-2"/> Facebook</a></li>
+                            <li><a href="#"><img src="{{ asset('assets/images/twitter.svg') }}" class="mr-2"/> Twitter</a></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!--FIN FOOTER-->
+
+
+
+
+        {#<div>#}
+            {#<h1>Liste des parties</h1>#}
+            {#<ul>#}
+
+                {#{% for partie in parties[0] %}#}
+
+                    {#<li><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Accéder à la partie contre {{ partie.joueur2.username }}</li>#}
+                {#{% endfor %}#}
+                {#{% for partie in parties[1] %}#}
+
+                    {#<li><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Accéder à la partie contre {{#}
+                        {#partie.joueur1.username }}</li>#}
+                {#{% endfor %}#}
+            {#</ul>#}
+        {#</div>#}
     </div>
 {% endblock %}
