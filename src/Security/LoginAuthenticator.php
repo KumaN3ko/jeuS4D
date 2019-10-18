@@ -86,7 +86,13 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
         }
 
         // For example : return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        return new RedirectResponse($this->urlGenerator->generate('partie'));
+        $roles = $token->getRoleNames();
+        if ($roles== 'ADMIN') {
+            return new RedirectResponse($this->urlGenerator->generate('admin'));
+        }
+        elseif ($roles== 'JOUEUR') {
+            return new RedirectResponse($this->urlGenerator->generate('partie'));
+        }
     }
 
     protected function getLoginUrl()

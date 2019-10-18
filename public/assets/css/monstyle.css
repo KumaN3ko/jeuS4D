@@ -1,19 +1,31 @@
-.carteMain {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
+body{
+    background-image: url('../images/plateau.png');
+    background-size:cover;
+    color: white;
 }
-
-.tuile {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    border: solid 1px;
+.container{
+    margin-top:-77px;
 }
-
-.carte {
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    border: solid 1px;
+.couleurCarte{
+    width:111px;
+    height:154px;
+    color: white;
+    border: 1px solid black;
+    background-size: cover;
+}
+.tuile{
+    width:103px;
+    height:114px;
+    background-size: cover;
+}
+.cartePosee1, .cartePoseeB1, .cartePoseeB2, .cartePosee2{
+    margin-bottom: 1rem;
+}
+.carte{
+    width:111px;
+    height:77px;
+    border:1px solid white;
+}
+.mainJ2, .mainJ1, .tuilesJ1, .tuilesJ2, .ligne, .tuiles{
+    justify-content: space-evenly;
 }

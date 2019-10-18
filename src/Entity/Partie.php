@@ -67,6 +67,21 @@ class Partie
      */
     private $joueur2;
 
+    /**
+     * @ORM\Column(type="array", length=255)
+     */
+    private $tuile;
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $tuileJ1 = [];
+
+    /**
+     * @ORM\Column(type="array")
+     */
+    private $tuileJ2 = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -188,6 +203,42 @@ class Partie
     public function setJoueur2(?Joueur $joueur2): self
     {
         $this->joueur2 = $joueur2;
+
+        return $this;
+    }
+
+    public function getTuile(): ?array
+    {
+        return $this->tuile;
+    }
+
+    public function setTuile(array $tuile): self
+    {
+        $this->tuile = $tuile;
+
+        return $this;
+    }
+
+    public function getTuileJ1(): ?array
+    {
+        return $this->tuileJ1;
+    }
+
+    public function setTuileJ1(array $tuileJ1): self
+    {
+        $this->tuileJ1 = $tuileJ1;
+
+        return $this;
+    }
+
+    public function getTuileJ2(): ?array
+    {
+        return $this->tuileJ2;
+    }
+
+    public function setTuileJ2(array $tuileJ2): self
+    {
+        $this->tuileJ2 = $tuileJ2;
 
         return $this;
     }

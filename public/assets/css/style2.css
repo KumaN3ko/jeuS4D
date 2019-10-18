@@ -1,0 +1,248 @@
+@font-face {
+    font-family: "CloisterBlack";
+    src: url("../polices/CloisterBlack.ttf");
+}
+.dropdown-item{
+    text-shadow: none;
+}
+.jeu_footer{
+    background-color: transparent !important;
+}
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(255, 255, 255) !important;
+}
+select{
+    background-color: transparent;
+    border: none;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: white;
+}
+body{
+    margin:0;
+    background-image: url("../images/fond.png");
+    background-attachment: fixed;
+    background-size:cover;
+}
+a{
+    color: white;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration:none !important;
+}
+body, html{
+    height:100%;
+    font-family: "Arial Rounded MT Bold", sans-serif !important;
+}
+header{
+    height: 100%;
+    margin:0 !important;
+    display: flex;
+    justify-content: center;
+    padding-top:3%;
+    padding-bottom:3%;
+    align-items: center;
+}
+h1{
+    color: #bd1622;
+    font-family: CloisterBlack, serif;
+    font-size:4.5rem !important;
+    line-height:0.5 !important;
+}
+h2{
+    color: #bd1622;
+    font-family: CloisterBlack, serif;
+    font-size:3rem !important;
+}
+h3{
+    font-family: CloisterBlack, serif;
+    font-size:4.5rem !important;
+    color: #bd1622;
+}
+p{
+    font-size:1rem;
+}
+.container{
+    background-color: #fff4d4;
+    padding:0 !important;
+}
+.navbar-nav{
+    text-shadow: -1px 0 black, 0 1px black,
+    1px 0 black, 0 -1px black
+}
+.btn-decouvrir{
+    background-color: #bd1622 !important;
+    font-family: CloisterBlack, serif !important;
+    font-size:1.5rem !important;
+    border-radius:10px !important;
+    padding:10px 40px !important;
+    display: block !important;
+    margin: 0 10px 0 10px;
+}
+.btn-ajouter{
+    background-color: #bd1622 !important;
+    font-family: CloisterBlack, serif !important;
+    font-size:1.5rem !important;
+    border-radius:10px !important;
+    padding:10px 40px !important;
+    margin-left: auto;
+    margin-right: auto;
+}
+.navbar{
+    font-size:30px;
+}
+.logo_nav{
+    width:135px;
+}
+.icones_nav{
+    width:35px;
+}
+.center_div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.center_div2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.center_div3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.center_div4{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.footer_li_centered{
+    text-align: center;
+}
+
+header{
+    height:428px;
+    background-image: url("../images/jeu_header.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.jouer{
+    height:100px;
+}
+.infos{
+    height:300px;
+}
+.infos_container{
+    height:214px;
+    width: 610px;
+    background-image:url("../images/jeu_infos.png");
+    border-radius: 10px;
+}
+.pseudo{
+    color: #bd1622;
+    font-size: 40px;
+    font-family: CloisterBlack, serif;
+}
+.nbparties{
+    background-color: #fff4d4;
+    border-radius: 10px;
+    font-size: 30px;
+    font-family: CloisterBlack, serif;
+    padding: 10px 20px 10px 20px;
+    margin-top: 20px;
+}
+.infosl1, .infosl2{
+    justify-content: space-around;
+    align-items: center;
+}
+.stats2{
+    position:relative;
+}
+.infos_img{
+    border: solid 2px black;
+    border-radius: 20px;
+}
+.winloss{
+    font-size: 25px;
+    font-family: CloisterBlack, serif;
+}
+.win{
+    position: absolute;
+    left: 35px;
+    color:#bd1622;
+}
+.loss{
+    position: absolute;
+    right: 35px;
+    color: #fff4d4;
+}
+.stats1{
+    justify-content: space-between;
+}
+.parties{
+    height:400px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.delimiteur{
+    margin:10px 0 30px 0;
+}
+.parties_gauche{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.thead{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    height: 50px;
+    background-color: #c8a79a;
+    align-items: center;
+    margin-bottom:10px;
+}
+.tbody{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    height: 30px;
+    background-color: #c8a79a;
+    align-items: center;
+    margin-bottom:5px;
+}
+.parties_droite{
+    display: flex;
+    align-items: center;
+}
+footer{
+    height:350px;
+    background-image:url("../images/footer.png");
+    font-size:20px;
+    display: flex !important;
+    align-items: center;
+}
+footer p{
+    font-size:25px;
+}
+footer ul{
+    list-style: none;
+    padding:0;
+}
+footer ul li{
+    margin-bottom:10px;
+}
+footer ul li a{
+    text-decoration: none;
+    color:white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+footer ul li a:hover{
+    text-decoration: none;
+    color: #bd1622;
+}
+footer ul li img{
+    width:35px;
+}
