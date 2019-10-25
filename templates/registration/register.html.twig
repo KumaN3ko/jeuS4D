@@ -1,16 +1,87 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
-
+{% block stylesheets %}
+{{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
+{% endblock %}
 {% block body %}
-    <h1>Register</h1>
+    <div class="container">
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.username) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <!--HEADER-->
 
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <header id="header">
+            <div class="logo center_div2"><img src="{{ asset('assets/images/jeu_logo.png') }}" alt="logo"/></div>
+        </header>
+
+        <!--FIN HEADER-->
+
+
+
+        <div class="enregistrerP">
+            <span class="senregistrer">S'enregistrer</span>
+            {#<form class="center_div3" name="registration_form" method="post">#}
+            {% form_theme registrationForm 'bootstrap_4_layout.html.twig' %}
+            {{ form_start(registrationForm) }}
+            <div class="enregistrer row">
+                <div class="col-lg-4">
+                    {{ form_widget(registrationForm.username) }}
+                    {{ form_widget(registrationForm.email) }}
+                </div>
+                <div class="col-lg-4">
+                    {{ form_widget(registrationForm.plainPassword) }}
+                    {{ form_widget(registrationForm.agreeTerms) }}
+                </div>
+            </div>
+
+            <button class="btn btn-danger btn-decouvrir valider">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+            {#</form>#}
+
+        <!--FOOTER-->
+
+        <footer>
+            <div class="container jeu_footer">
+                <div class="row">
+                    <div class="col-lg-12 center_div2 mb-4">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="logo_nav"/>
+                    </div>
+                </div>
+
+                <div class="row mt-4 center_div2">
+                    <div class="col-lg-4 center_div4">
+                        <p>Templar order</p>
+                        <ul>
+                            <li v-if="language=='fr'" class="footer_li_centered"><a href="#header">Accueil</a></li>
+                            <li v-if="language=='en'" class="footer_li_centered"><a href="#header">Home</a></li>
+                            <li class="footer_li_centered"><a href="../">Agence DATA</a></li>
+                            <li v-if="language=='fr'" class="footer_li_centered"><a href="../promo">Site officiel</a></li>
+                            <li v-if="language=='en'" class="footer_li_centered"><a href="../promo">Official website</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 center_div4">
+                        <p v-if="language=='fr'">Réseaux sociaux</p>
+                        <p v-if="language=='en'">Social media</p>
+                        <ul>
+                            <li><a href="https://www.facebook.com/Templar-111711846897356/"target="_blank"><img src="{{ asset('assets/images/fb.svg') }}" class="mr-2"/> Facebook</a></li>
+                            <li><a href="https://twitter.com/Templar08600386" target="_blank"><img src="{{ asset('assets/images/twitter.svg') }}" class="mr-2"/> Twitter</a></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+        <!--FIN FOOTER-->
+
+    <script>
+        var vue1 = new Vue({
+            "el": ".container",
+            "data": {
+                language: "fr"
+            },
+        })
+    </script>
 {% endblock %}

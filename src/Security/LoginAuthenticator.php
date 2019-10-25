@@ -38,7 +38,7 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
 
     public function supports(Request $request)
     {
-        return 'app_login' === $request->attributes->get('_route')
+        return 'homepage' === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -49,6 +49,8 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
             'password' => $request->request->get('password'),
             'csrf_token' => $request->request->get('_csrf_token'),
         ];
+
+        dump($credentials);
         $request->getSession()->set(
             Security::LAST_USERNAME,
             $credentials['username']
@@ -97,6 +99,6 @@ class LoginAuthenticator extends AbstractFormLoginAuthenticator
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('app_login');
+        return $this->urlGenerator->generate('homepage');
     }
 }

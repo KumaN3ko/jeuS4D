@@ -1,0 +1,202 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+
+        <!--HEADER-->
+
+        <header id="header">
+            <div class="logo center_div2b">
+                <img src="{{ asset('assets/images/jeu_logo.png') }}" alt="logo" class="lelogo"/>
+                <div class="resaux">
+                    <a href="https://www.facebook.com/Templar-111711846897356/" target="_blank">
+                        <div class="fb">
+                            <img src="{{ asset('assets/images/fb2.svg') }}" alt="logo facebook" class="fb2"/>
+                            <span class="fb3">Aimer la page</span>
+                        </div>
+                    </a>
+                    <a href="https://twitter.com/Templar08600386" target="_blank">
+                        <div class="twitter">
+                            <img src="{{ asset('assets/images/twitter2.svg') }}" alt="logo facebook" class="fb2"/>
+                            <span class="fb3">Suivre @templarOff</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </header>
+
+        <!--FIN HEADER-->
+        <!--BOUTON JOUER-->
+
+        <div class="jouer center_div2">
+            <img src="{{ asset('assets/images/fleche_gauche.png') }}" alt="fleche gauche"/>
+            <button type="button" class="btn btn-danger btn-decouvrir">JOUER</button>
+            <img src="{{ asset('assets/images/fleche_droite.png') }}" alt="fleche droite"/>
+        </div>
+
+        <!--FIN BOUTON JOUER-->
+        <!--COMBATTEZ-->
+
+        <div class="infos center_div2b">
+            <div class="combattez_container">
+                <div class="row infosl1">
+                    <span class="combattez">Combattez pour la Victoire !</span>
+                </div>
+                <div class="row infosl2">
+                    <img src="{{ asset('assets/images/chevalier1.png') }}" alt="un chevalier"/>
+                    <img src="{{ asset('assets/images/blason.png') }}" alt="un blason"/>
+                    <img src="{{ asset('assets/images/chevalier2.png') }}" alt="un chevalier"/>
+                </div>
+            </div>
+
+            <!--CONNEXION-->
+
+
+            <div class="combattez2_container">
+                <div class="row infosl1">
+                    <span class="compte">Déjà un compte ?</span>
+                    <img src="{{ asset('assets/images/separation2.png') }}" alt="separateur"/>
+                    <form method="post" class="account0">
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-3">
+                                You are logged in as {{ app.user.username }}, <a
+                                        href="{{ path('app_logout') }}">Logout</a>
+                            </div>
+                        {% endif %}
+                        <label for="inputUsername" class="sr-only">Username</label>
+                        <input type="text" value="{{ last_username }}" name="username" id="inputUsername"
+                               class="form-control account" placeholder="Username" required autofocus>
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control account"
+                               placeholder="Password" required>
+
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
+                        <!--LIEN VERS PORECEDURE MOT DE PASSE OUBLIE--><span>
+                            <a href="motdepasseoublie.php">Mot de passe oublié ?</a></span>
+                        <button class="btn btn-lg btn-primary account2" type="submit">
+                            Sign in
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        {#<div class="combattez2_container">#}
+        {#<div class="row infosl1">#}
+        {#<span class="compte">Déjà un compte ?</span>#}
+        {#<img src="{{ asset('assets/images/separation2.png') }}" alt="separateur"/>#}
+        {#<form class="account0">#}
+        {#<input type="text" class="account" placeholder="Pseudo..."/>#}
+        {#<input type="password" class="account" placeholder="Mot de passe..."/>#}
+        {#<!--LIEN VERS PORECEDURE MOT DE PASSE OUBLIE--><span><a href="motdepasseoublie.php">Mot de passe oublié ?</a></span>#}
+        {#<input type="submit" value="GO" class="account2"/>#}
+        {#</form>#}
+        {#</div>#}
+        {#</div>#}
+
+
+        <!--FIN CONNEXION-->
+
+        <!--FIN INFORMATIONS PERSONNAGE-->
+        <!--LISTE DES PARTIES-->
+
+        <div class="personnages0">
+            <div class="parties_gauche">
+                <span class="personnages">Personnages</span>
+                <img src="{{ asset('assets/images/separateur3.png') }}" alt="fleche noire" class="delimiteur"/>
+
+                <div class="persos">
+                    <div class="row lespersos">
+                        <img src="{{ asset('assets/images/perso1.png') }}" alt="un personnage"/>
+                        <img src="{{ asset('assets/images/perso2.png') }}" alt="un personnage"/>
+                        <img src="{{ asset('assets/images/perso3.png') }}" alt="un personnage"/>
+                    </div>
+                    <div class="row lespersos">
+                        <img src="{{ asset('assets/images/perso4.png') }}" alt="un personnage"/>
+                        <img src="{{ asset('assets/images/perso5.png') }}" alt="un personnage"/>
+                        <img src="{{ asset('assets/images/perso6.png') }}" alt="un personnage"/>
+                    </div>
+                    <div class="row lespersos">
+                        <img src="{{ asset('assets/images/perso7.png') }}" alt="un personnage"/>
+                        <img src="{{ asset('assets/images/perso8.png') }}" alt="un personnage"/>
+                        <img src="{{ asset('assets/images/perso9.png') }}" alt="un personnage"/>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="parties_droite center_div">
+                <span class="adaptation1">Adaptation officielle du jeu de carte Templar</span>
+                <span class="adaptation2">Rejoignez une communauté, jouez avec vos amis</span>
+                <img src="{{ asset('assets/images/separateur_inscription.png') }}" alt="separateur" class="separation"/>
+                <a href="inscription.php">
+                    <a href="{{ path('app_register') }}"><button type="button" class="btn btn-danger btn-decouvrir">S'inscrire</button></a>
+                </a>
+            </div>
+        </div>
+
+        <!--FIN LISTE DES PARTIES-->
+        <!--FOOTER-->
+
+        <footer>
+            <div class="container jeu_footer">
+                <div class="row">
+                    <div class="col-lg-12 center_div2 mb-4">
+                        <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="logo_nav"/>
+                    </div>
+                </div>
+
+                <div class="row mt-4 center_div2">
+                    <div class="col-lg-4 center_div4">
+                        <p>Templar order</p>
+                        <ul>
+                            <li v-if="language=='fr'" class="footer_li_centered"><a href="#header">Accueil</a></li>
+                            <li v-if="language=='en'" class="footer_li_centered"><a href="#header">Home</a></li>
+                            <li class="footer_li_centered"><a href="../">Agence DATA</a></li>
+                            <li v-if="language=='fr'" class="footer_li_centered"><a href="../promo">Site officiel</a>
+                            </li>
+                            <li v-if="language=='en'" class="footer_li_centered"><a href="../promo">Official website</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-lg-4 center_div4">
+                        <p v-if="language=='fr'">Réseaux sociaux</p>
+                        <p v-if="language=='en'">Social media</p>
+                        <ul>
+                            <li><a href="https://www.facebook.com/Templar-111711846897356/" target="_blank"><img
+                                            src="{{ asset('assets/images/fb.svg') }}" class="mr-2"/> Facebook</a></li>
+                            <li><a href="https://twitter.com/Templar08600386" target="_blank"><img
+                                            src="{{ asset('assets/images/twitter.svg') }}" class="mr-2"/> Twitter</a>
+                            </li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!--FIN FOOTER-->
+
+    </div>
+
+    <script>
+        var vue1 = new Vue({
+            "el": ".container",
+            "data": {
+                language: "fr"
+            },
+        })
+    </script>
+{% endblock %}

@@ -3,7 +3,7 @@
 {% block title %}Hello PartieController!{% endblock %}
 {% block stylesheets %}
 {{ parent() }}
-    <link rel="stylesheet" href="{{ asset('assets/css/style2.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styleJ.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets/images/logo.svg') }}">
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 {% endblock %}
@@ -30,11 +30,11 @@
         <!--FIN BOUTON JOUER-->
         <!--INFORMATIONS PERSONNAGE-->
 
-        <div class="infos center_div2">
+        <div class="infos center_div3">
             <div class="infos_container">
                 <div class="row infosl1">
-                    <span class="pseudo">Pseudo</span>
-                    <span class="nbparties">Nombre de parties jouées : XX</span>
+                    <span class="pseudo">{{ joueurco }}</span>
+                    <span class="nbparties">Nombre de parties jouées : {{ perdu + gagne }}</span>
                 </div>
                 <div class="row infosl2">
                     <img src="{{ asset('assets/images/jeu_bebe.png') }}" alt="image de bébé" class="infos_img"/>
@@ -45,12 +45,21 @@
                         </div>
                         <div class="row stats2">
                             <img src="{{ asset('assets/images/fleche_victoire.png') }}" alt="fleche gauche"/>
-                            <span class="win">23</span>
+                            <span class="win">{{ gagne }}</span>
                             <img src="{{ asset('assets/images/fleche_defaite.png') }}" alt="fleche droite"/>
-                            <span class="loss">18</span>
+                            <span class="loss">{{ perdu }}</span>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="infos_container2 mt-3">
+                <span class="pseudo">Modifier les informations</span>
+                <form class="center_div3">
+                    <input class="modifierCompte" type="text" placeholder="pseudo" value="{{ joueurco }}"/>
+                    <input class="modifierCompte" type="password" placeholder="Mot de passe"/>
+                    <input class="modifierCompte" type="text" placeholder="mail" value="{{ mail }}" disabled/>
+                    <button type="submit" class="btn btn-danger btn-decouvrir mt-2">Valider</button>
+                </form>
             </div>
         </div>
 
@@ -73,15 +82,23 @@
 
                 <!--BOUCLE PARTIES EN COURS-->
 
-                <div class="tbody">
 
                     {% for partie in parties[0] %}
+                    <div class="tbody">
                         <div class="parties_partie"><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Acceder</a></div>
                         <div class="parties_joueur">{{ partie.joueur2.username }}</div>
                         <div class="parties_cours">7</div>
+                    </div>
+                    {% endfor %}
+                    {% for partie in parties[1] %}
+                    <div class="tbody">
+                        <div class="parties_partie"><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Acceder</a></div>
+                        <div class="parties_joueur">{{ partie.joueur2.username }}</div>
+                        <div class="parties_cours">7</div>
+                    </div>
                     {% endfor %}
 
-                </div>
+
 
 
                 <!--FIN BOUCLE PARTIES EN COURS-->
@@ -91,9 +108,10 @@
 
 
                 <h2 >Créer une partie</h2>
+                <img src="{{ asset('assets/images/fleche_noire.png') }}" alt="fleche noire" class="delimiteur"/>
                 <form action="{{ path('nouvelle_partie') }}" method="POST">
                     <div class="form-group">
-                        <label for="adversaire">Choisir l'adversaire</label>
+                        <label for="adversaire">choix de l'adversaire</label>
                         <select name="adversaire" id="adversaire" class="form-control">
                             <option value="">Choisir l'adversaire</option>
                             {% for joueur in joueurs if joueur.username != app.user.username %}
@@ -105,6 +123,7 @@
                         <button type="submit" class="btn btn-danger btn-decouvrir">Créer la partie</button>
                     </div>
                 </form>
+                <button type="submit" class="btn btn-danger btn-decouvrir mt-3">Déconnexion</button>
             </div>
         </div>
 
@@ -114,7 +133,7 @@
         <!--FOOTER-->
 
         <footer>
-            <div class="container jeu_footer">
+            <div class="container jeu_footer mt-5">
                 <div class="row">
                     <div class="col-lg-12 center_div2 mb-4">
                         <img src="{{ asset('assets/images/logo.png') }}" alt="logo" class="logo_nav"/>
@@ -136,8 +155,8 @@
                         <p v-if="language=='fr'">Réseaux sociaux</p>
                         <p v-if="language=='en'">Social media</p>
                         <ul>
-                            <li><a href="#"><img src="{{ asset('assets/images/fb.svg') }}" class="mr-2"/> Facebook</a></li>
-                            <li><a href="#"><img src="{{ asset('assets/images/twitter.svg') }}" class="mr-2"/> Twitter</a></li>
+                            <li><a href="https://www.facebook.com/Templar-111711846897356/" target="_blank"><img src="{{ asset('assets/images/fb.svg') }}" class="mr-2"/> Facebook</a></li>
+                            <li><a href="https://twitter.com/Templar08600386" target="_blank"><img src="{{ asset('assets/images/twitter.svg') }}" class="mr-2"/> Twitter</a></li>
                             <li></li>
                         </ul>
                     </div>
@@ -165,5 +184,14 @@
                 {#{% endfor %}#}
             {#</ul>#}
         {#</div>#}
+
+        <script>
+            var vue1 = new Vue({
+                "el": ".container",
+                "data": {
+                    language: "fr"
+                },
+            })
+        </script>
     </div>
 {% endblock %}

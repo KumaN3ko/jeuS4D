@@ -57,6 +57,16 @@ class Joueur implements UserInterface
      */
     private $gagnants;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $gagne;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $perdu;
+
     public function __construct()
     {
         $this->partiesJ1 = new ArrayCollection();
@@ -223,6 +233,30 @@ class Joueur implements UserInterface
         $parties[] = $this->getPartiesJ1();
         $parties[] = $this->getPartiesJ2();
         return $parties;
+    }
+
+    public function getGagne(): ?int
+    {
+        return $this->gagne;
+    }
+
+    public function setGagne(int $gagne): self
+    {
+        $this->gagne = $gagne;
+
+        return $this;
+    }
+
+    public function getPerdu(): ?int
+    {
+        return $this->perdu;
+    }
+
+    public function setPerdu(int $perdu): self
+    {
+        $this->perdu = $perdu;
+
+        return $this;
     }
 
 }

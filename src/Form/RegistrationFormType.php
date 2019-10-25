@@ -19,7 +19,7 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username')
+            ->add('username', TextType::class, ['attr' => ['class' => 'modifierCompte', 'placeholder' => 'Username']])
             ->add('email', TextType::class, [
                 'constraints' => [
                     new NotBlank([
@@ -28,7 +28,8 @@ class RegistrationFormType extends AbstractType
                     new Email([
                         'message' => 'Saisir un email valide'
                     ])
-                ]
+                ],
+                'attr' => ['class' => 'modifierCompte', 'placeholder' => 'Mail']
             ])
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -45,6 +46,7 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+                'attr' => ['class' => 'modifierCompte', 'placeholder' => 'Mot de passe']
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,

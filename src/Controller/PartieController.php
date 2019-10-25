@@ -27,10 +27,24 @@ class PartieController extends AbstractController
 
         $parties = $this->getUser()->getToutesMesParties();
 
+        $joueurco = $this->getUser()->getUsername();
+
+        $mail = $this->getUser()->getEmail();
+
+        $gagne = $this->getUser()->getGagne();
+
+        $perdu = $this->getUser()->getPerdu();
+
 
         return $this->render('partie/index.html.twig', [
             'joueurs' => $joueurs,
-            'parties' => $parties
+            'parties' => $parties,
+            'gagne' => $gagne,
+            'perdu' => $perdu,
+            'joueurco' => $joueurco,
+            'mail' => $mail,
+
+
         ]);
     }
 
@@ -155,15 +169,14 @@ class PartieController extends AbstractController
         }
 
         // Retirer carte main
-        var_dump($mainJ1);
+
 
         $mainJ1 = array_diff($mainJ1, [$carte]);
         $pioche = $partie->getPioche();
         shuffle($pioche);
         $mainJ1[] =  array_pop($pioche);
         $partie->setPioche($pioche);
-        var_dump($mainJ1);
-        var_dump(count($pioche));
+
 
 
         if ($leuser == $partie->getJoueur1()->getId()) {
@@ -189,8 +202,19 @@ class PartieController extends AbstractController
 
         // Condition d'attribution des tuiles
 
+            $allcarte = $carteRepository->findAll();
+
+            $cartepose = $allcarte[$carte]->getCouleur();
+
+            var_dump($cartepose);
 
 
+
+
+
+
+
+        // Fin condition d'attribution
         $setTour = $partieRepository->find($idPartie);
         $setTour->setTour($tour);
 
