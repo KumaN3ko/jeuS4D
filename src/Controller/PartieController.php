@@ -54,79 +54,86 @@ class PartieController extends AbstractController
      */
     public function nouvellePartie(JoueurRepository $joueurRepository, CarteRepository $carteRepository, Request $request)
     {
-        $joueur1 = $this->getUser();
-        $joueur2 = $joueurRepository->find($request->get('adversaire'));
 
-
-        $cartes = $carteRepository->findAll();
-
-        $partie = new Partie();
-        $partie->setJoueur1($joueur1);
-        $partie->setJoueur2($joueur2);
-
-        $pioche = [];
-        foreach ($cartes as $carte) {
-            $pioche[] = $carte->getId();
-        }
-        shuffle($pioche);
-
-        $mainJ1= [];
-        $mainJ2= [];
-        for ($i=0; $i < 6; $i++) {
-            $mainJ1[] =  array_pop($pioche);
-            $mainJ2[] =  array_pop($pioche);
+        if (empty($joueurRepository->find($request->get('adversaire')))) {
+            return $this->redirectToRoute('partie');
         }
 
-        // tuile
+        else {
 
-        $tuile = [];
-        for ($i=1; $i < 10; $i++) {
-            $tuile[] = $i;
+            $joueur1 = $this->getUser();
+            $joueur2 = $joueurRepository->find($request->get('adversaire'));
+
+
+            $cartes = $carteRepository->findAll();
+
+            $partie = new Partie();
+            $partie->setJoueur1($joueur1);
+            $partie->setJoueur2($joueur2);
+
+            $pioche = [];
+            foreach ($cartes as $carte) {
+                $pioche[] = $carte->getId();
+            }
+            shuffle($pioche);
+
+            $mainJ1 = [];
+            $mainJ2 = [];
+            for ($i = 0; $i < 6; $i++) {
+                $mainJ1[] = array_pop($pioche);
+                $mainJ2[] = array_pop($pioche);
+            }
+
+            // tuile
+
+            $tuile = [];
+            for ($i = 1; $i < 10; $i++) {
+                $tuile[] = $i;
+            }
+
+            $tuileJ1 = [];
+            for ($i = 1; $i < 10; $i++) {
+                $tuileJ1[] = 0;
+            }
+
+            $tuileJ2 = [];
+            for ($i = 1; $i < 10; $i++) {
+                $tuileJ2[] = 0;
+            }
+
+            $partie->setTuileJ1($tuileJ1);
+            $partie->setTuileJ2($tuileJ2);
+            $partie->setTuile($tuile);
+            $partie->setMainJ1($mainJ1);
+            $partie->setMainJ2($mainJ2);
+            $partie->setPioche($pioche);
+            $partie->setTypeVictoire('');
+
+            $partie->setDateVictoire(new \DateTime('now'));
+            $partie->setTour(1);
+
+            $terrainJ1 = [];
+            $terrainJ2 = [];
+
+            for ($i = 1; $i <= 9; $i++) {
+                $terrainJ1[$i][1] = 0;
+                $terrainJ1[$i][2] = 0;
+                $terrainJ1[$i][3] = 0;
+                $terrainJ2[$i][1] = 0;
+                $terrainJ2[$i][2] = 0;
+                $terrainJ2[$i][3] = 0;
+            }
+
+            $partie->setTerrainJ1($terrainJ1);
+            $partie->setTerrainJ2($terrainJ2);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($partie);
+            $em->flush();
+
+            return $this->redirectToRoute('afficher_partie', ['idPartie' => $partie->getId()]);
+
         }
-
-        $tuileJ1 = [];
-        for ($i=1; $i < 10; $i++) {
-            $tuileJ1[] = 0;
-        }
-
-        $tuileJ2 = [];
-        for ($i=1; $i < 10; $i++) {
-            $tuileJ2[] = 0;
-        }
-
-        $partie->setTuileJ1($tuileJ1);
-        $partie->setTuileJ2($tuileJ2);
-        $partie->setTuile($tuile);
-        $partie->setMainJ1($mainJ1);
-        $partie->setMainJ2($mainJ2);
-        $partie->setPioche($pioche);
-        $partie->setTypeVictoire('');
-
-        $partie->setDateVictoire(new \DateTime('now'));
-        $partie->setTour(1);
-
-        $terrainJ1 = [];
-        $terrainJ2 = [];
-
-        for($i = 1; $i <= 9; $i++) {
-            $terrainJ1[$i][1] = 0;
-            $terrainJ1[$i][2] = 0;
-            $terrainJ1[$i][3] = 0;
-            $terrainJ2[$i][1] = 0;
-            $terrainJ2[$i][2] = 0;
-            $terrainJ2[$i][3] = 0;
-        }
-
-        $partie->setTerrainJ1($terrainJ1);
-        $partie->setTerrainJ2($terrainJ2);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($partie);
-        $em->flush();
-
-        return $this->redirectToRoute('afficher_partie', ['idPartie' => $partie->getId()]);
-
-
 
     }
 

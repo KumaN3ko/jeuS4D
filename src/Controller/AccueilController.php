@@ -37,4 +37,24 @@ class AccueilController extends AbstractController
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
     }
+
+    /**
+     * @Route("/modification", name="app_modif")
+     */
+    public function modif(JoueurRepository $joueurRepository)
+    {
+        $joueurs = $joueurRepository->findAll();
+        $joueurs = $this->getUser();
+
+        $pseudo = $_POST['pseudo'];
+
+        $joueurs->setUsername($pseudo);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($joueurs);
+        $em->flush();
+
+        return $this->redirectToRoute('partie');
+
+    }
 }

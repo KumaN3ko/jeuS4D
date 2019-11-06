@@ -54,9 +54,8 @@
             </div>
             <div class="infos_container2 mt-3">
                 <span class="pseudo">Modifier les informations</span>
-                <form class="center_div3">
-                    <input class="modifierCompte" type="text" placeholder="pseudo" value="{{ joueurco }}"/>
-                    <input class="modifierCompte" type="password" placeholder="Mot de passe"/>
+                <form class="center_div3" method="post" action="{{ path('app_modif') }}">
+                    <input class="modifierCompte" name="pseudo" type="text" placeholder="pseudo" value="{{ joueurco }}"/>
                     <input class="modifierCompte" type="text" placeholder="mail" value="{{ mail }}" disabled/>
                     <button type="submit" class="btn btn-danger btn-decouvrir mt-2">Valider</button>
                 </form>
@@ -123,7 +122,7 @@
                         <button type="submit" class="btn btn-danger btn-decouvrir">Créer la partie</button>
                     </div>
                 </form>
-                <button type="submit" class="btn btn-danger btn-decouvrir mt-3">Déconnexion</button>
+                <a href="{{ path('app_logout') }}"><button type="submit" class="btn btn-danger btn-decouvrir mt-3">Déconnexion</button></a>
             </div>
         </div>
 
