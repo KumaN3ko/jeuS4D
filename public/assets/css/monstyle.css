@@ -3,6 +3,29 @@ body{
     background-size:cover;
     color: white;
 }
+
+.popup {
+    position: fixed;
+    width: 100vw;
+    height: 100vw;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.perdu {
+    text-align: center;
+    margin-top: 40vh;
+    font-size: 100px;
+    color: darkred;
+}
+
+.gagne {
+    text-align: center;
+    margin-top: 40vh;
+    font-size: 100px;
+    color: darkgreen;
+}
+
+
 .container{
     margin-top:-77px;
 }

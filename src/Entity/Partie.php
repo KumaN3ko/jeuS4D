@@ -82,6 +82,11 @@ class Partie
      */
     private $tuileJ2 = [];
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $gagnant_id;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -239,6 +244,18 @@ class Partie
     public function setTuileJ2(array $tuileJ2): self
     {
         $this->tuileJ2 = $tuileJ2;
+
+        return $this;
+    }
+
+    public function getGagnantId(): ?int
+    {
+        return $this->gagnant_id;
+    }
+
+    public function setGagnantId(?int $gagnant_id): self
+    {
+        $this->gagnant_id = $gagnant_id;
 
         return $this;
     }

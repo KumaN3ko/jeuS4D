@@ -6,17 +6,24 @@
 {% endblock %}
 
 {% block body %}
+    {% if gagnant is not empty %}
+    {% if gagnant == user %}
+        <div class="popup"><p class="gagne">Vous avez gagné!</p></div>
+    {% else %}
+        <div class="popup"><p class="perdu">Vous avez perdu!</p></div>
+    {% endif %}
+    {% endif %}
 <div id="plateau" class="container mb-3">
     <div class="mainJ2 row mb-2">
         {% for idCarte in  mainJ2 %}
             <div class="carteMain couleurCarte"
-                 style="background-color:{{ cartes[idCarte].couleur }};">{{ cartes[idCarte].puissance }}</div>
+                 style="background-color:{{ cartes[idCarte].couleur }};"><img src="{{ asset('assets/images/dos.png') }}" alt=""></div>
         {% endfor %}
     </div>
     <div class="tuilesJ2 row">
         {% for i in tuileJ2 %}
             {% if i==0 %}
-                <div class="tuile">-</div>
+                <div class="tuile"></div>
             {% else %}
             <div class="tuile" style="background-image: url('/jeuS4D/public/assets/images/blason_{{ i }}.png')"></div>
         {% endif %}
@@ -29,7 +36,7 @@
                     {% if terrainJ2[i][j]==0 %}
                         <div class="carte droppable" data-ligne="{{ j }}" data-colonne="{{ i }}">-</div>
                     {% else %}
-                        <div class="carte"><img src="/jeuS4D/public/assets/images/{{ cartes[terrainJ2[i][j]].image}}" alt="carte posée" style="width:111px;">{{ terrainJ2[i][j] }}</div>
+                        <div class="carte"><img src="/jeuS4D/public/assets/images/{{ cartes[terrainJ2[i][j]].image}}" alt="carte posée" style="width:111px;"></div>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -48,7 +55,7 @@
                         <div class="carte droppable" data-ligne="{{ j }}" data-colonne="{{ i }}"></div>
                         {% else %}
                             <div class="carte">
-                                <img src="/jeuS4D/public/assets/images/{{ cartes[terrainJ1[i][j]].image}}" alt="carte posée" style="width:111px;">{{ terrainJ1[i][j] }}</div>
+                                <img src="/jeuS4D/public/assets/images/{{ cartes[terrainJ1[i][j]].image}}" alt="carte posée" style="width:111px;"></div>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -57,7 +64,7 @@
     <div class="tuilesJ1 row">
         {% for i in tuileJ1 %}
             {% if i==0 %}
-                <div class="tuile">-</div>
+                <div class="tuile"></div>
             {% else %}
                 <div class="tuile" style="background-image: url('/jeuS4D/public/assets/images/blason_{{ i }}.png')"></div>
             {% endif %}
@@ -84,7 +91,9 @@
 
 
         {#condition pour connaitre le joueur actif et lier le tour au joueur  (necessité de transformer le joueur1 en pseudo lié à l'id)  #}
-        {#{% if joueur1 == user %}#}
+        {% if gagnant is empty %}
+
+
         {% if user == joueur1 %}
 
             {% if tour == 1 %}
@@ -167,51 +176,7 @@
             {% endif %}
 
         {% endif %}
-
-
-
-
-        {#{% endif %}#}
-
-
-        {#condition pour connaitre le joueur actif et lier le tour au joueur (necessité de transformer le joueur1 en pseudo lié à l'id) #}
-        {#{% if joueur2 == user %}#}
-
-            {#{% if tour == 2 %}#}
-                {#{{ parent() }}#}
-                {#<script>#}
-                    {#$( function() {#}
-                        {#$( ".draggable" ).draggable({ revert: 'invalid' });#}
-                        {#$( ".droppable" ).droppable({#}
-                            {#accept: ".draggable",#}
-                            {#classes: {#}
-                                {#"ui-droppable-active": "ui-state-active",#}
-                                {#"ui-droppable-hover": "ui-state-hover"#}
-                            {#},#}
-                            {#drop: function( event, ui ) {#}
-                                {#$(this).addClass("ui-state-highlight")#}
-                                {#$.ajax({#}
-                                    {#url: "{{ path('depose_carte', {idPartie:partie.id }) }}",#}
-                                    {#method: 'POST',#}
-                                    {#data: {#}
-                                        {#carte: ui.draggable.data('carte'),//data-carte dans le HTML pour chaque carte#}
-                                        {#colonne: $(this).data('colonne'), //colonne du plateau de jeu data-colonne#}
-                                        {#ligne: $(this).data('ligne') //ligne du plateau de jeu data-ligne#}
-                                    {#},#}
-
-                                    {#success: function(){#}
-
-                                    {#}#}
-                                {#})#}
-
-                            {#}#}
-                        {#});#}
-                    {#} );#}
-                {#</script>#}
-            {#{% endif %}#}
-
-        {#{% endif %}#}
-
+        {% endif %}
     {% endblock %}
 
 

@@ -87,14 +87,14 @@
                     <div class="tbody">
                         <div class="parties_partie"><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Acceder</a></div>
                         <div class="parties_joueur">{{ partie.joueur2.username }}</div>
-                        <div class="parties_cours">7</div>
+                        <div class="parties_cours" style="color: green;">Partie créée</div>
                     </div>
                     {% endfor %}
                     {% for partie in parties[1] %}
                     <div class="tbody">
                         <div class="parties_partie"><a href="{{ path('afficher_partie', {idPartie:partie.id}) }}">Acceder</a></div>
                         <div class="parties_joueur">{{ partie.joueur2.username }}</div>
-                        <div class="parties_cours">7</div>
+                        <div class="parties_cours" style="color: green;">Partie rejoins</div>
                     </div>
                     {% endfor %}
 
