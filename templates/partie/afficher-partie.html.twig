@@ -17,7 +17,7 @@
     <div class="mainJ2 row mb-2">
         {% for idCarte in  mainJ2 %}
             <div class="carteMain couleurCarte"
-                 style="background-color:{{ cartes[idCarte].couleur }};"><img src="{{ asset('assets/images/dos.png') }}" alt=""></div>
+                 style="background-color:dimgrey;"><img src="{{ asset('assets/images/dos.png') }}" alt=""></div>
         {% endfor %}
     </div>
     <div class="tuilesJ2 row">
@@ -25,7 +25,7 @@
             {% if i==0 %}
                 <div class="tuile"></div>
             {% else %}
-            <div class="tuile" style="background-image: url('{{ asset('assets/images/') }}blason_{{ i }}.png')"></div>
+            <div class="tuile" style="background-image: url('/jeu/assets/images/blason_{{ i }}.png')"></div>
         {% endif %}
         {% endfor %}
     </div>
@@ -36,7 +36,7 @@
                     {% if terrainJ2[i][j]==0 %}
                         <div class="carte droppable" data-ligne="{{ j }}" data-colonne="{{ i }}">-</div>
                     {% else %}
-                        <div class="carte"><img src="{{ asset('assets/images/') }}{{ cartes[terrainJ2[i][j]].image}}" alt="carte posée" style="width:111px;"></div>
+                        <div class="carte"><img src="/jeu/assets/images/{{ cartes[terrainJ2[i][j]].image}}" alt="carte posée" style="width:111px;"></div>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -44,7 +44,7 @@
     </div>
     <div class="tuiles row">
         {% for t in tuile %}
-            <div class="tuile" style="background-image: url('{{ asset('assets/images/') }}blason_{{ t }}.png')"></div>
+            <div class="tuile" style="background-image: url('/jeu/assets/images/blason_{{ t }}.png')"></div>
         {% endfor %}
     </div>
     <div class="cartesJ1 mt-5">
@@ -55,7 +55,7 @@
                         <div class="carte droppable" data-ligne="{{ j }}" data-colonne="{{ i }}"></div>
                         {% else %}
                             <div class="carte">
-                                <img src="{{ asset('assets/images/') }}{{ cartes[terrainJ1[i][j]].image}}" alt="carte posée" style="width:111px;"></div>
+                                <img src="/jeu/assets/images/{{ cartes[terrainJ1[i][j]].image}}" alt="carte posée" style="width:111px;"></div>
                     {% endif %}
                 {% endfor %}
             </div>
@@ -72,7 +72,7 @@
     </div>
     <div class="mainJ1 row mt-2"><br>
         {% for idCarte in  mainJ1 %}
-            <div class="carteMain draggable couleurCarte" style="background-image: url('{{ asset('assets/images/') }}{{ cartes[idCarte].image}}')"
+            <div class="carteMain draggable couleurCarte" style="background-image: url('/jeuS4D/public/assets/images/{{ cartes[idCarte].image}}')"
                  data-carte="{{ cartes[idCarte].id }}">
                 {{ cartes[idCarte].puissance }}
             </div>
