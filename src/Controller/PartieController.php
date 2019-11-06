@@ -76,8 +76,6 @@ class PartieController extends AbstractController
             $mainJ1[] =  array_pop($pioche);
             $mainJ2[] =  array_pop($pioche);
         }
-        dump($mainJ1);
-        dump($mainJ2);
 
         // tuile
 
@@ -95,8 +93,6 @@ class PartieController extends AbstractController
         for ($i=1; $i < 10; $i++) {
             $tuileJ2[] = 0;
         }
-
-        var_dump($tuile);
 
         $partie->setTuileJ1($tuileJ1);
         $partie->setTuileJ2($tuileJ2);
