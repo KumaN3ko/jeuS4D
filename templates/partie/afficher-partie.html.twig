@@ -66,13 +66,13 @@
             {% if i==0 %}
                 <div class="tuile"></div>
             {% else %}
-                <div class="tuile" style="background-image: url('/jeuS4D/public/assets/images/blason_{{ i }}.png')"></div>
+                <div class="tuile" style="background-image: url('/jeu/assets/images/blason_{{ i }}.png')"></div>
             {% endif %}
         {% endfor %}
     </div>
     <div class="mainJ1 row mt-2"><br>
         {% for idCarte in  mainJ1 %}
-            <div class="carteMain draggable couleurCarte" style="background-image: url('/jeuS4D/public/assets/images/{{ cartes[idCarte].image}}')"
+            <div class="carteMain draggable couleurCarte" style="background-image: url('/jeu/assets/images/{{ cartes[idCarte].image}}')"
                  data-carte="{{ cartes[idCarte].id }}">
                 {{ cartes[idCarte].puissance }}
             </div>
