@@ -35,6 +35,8 @@ class PartieController extends AbstractController
 
         $perdu = $this->getUser()->getPerdu();
 
+        $role = $this->getUser()->getRoles();
+
 
 
         return $this->render('partie/index.html.twig', [
@@ -44,6 +46,7 @@ class PartieController extends AbstractController
             'perdu' => $perdu,
             'joueurco' => $joueurco,
             'mail' => $mail,
+            'role' => $role[0],
 
 
         ]);

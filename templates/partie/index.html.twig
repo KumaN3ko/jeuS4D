@@ -23,7 +23,11 @@
 
         <div class="jouer center_div2">
             <img src="{{ asset('assets/images/fleche_gauche.png') }}" alt="fleche gauche"/>
-            <button type="button" class="btn btn-danger btn-decouvrir">JOUER</button>
+            {% if role == 'ROLE_ADMIN' %}
+                <a href="{{ path('easyadmin') }}"><button type="button" class="btn btn-danger btn-decouvrir">Gestion</button></a>
+                {% else %}
+                    <button type="button" class="btn btn-danger btn-decouvrir">JOUER</button>
+            {% endif %}
             <img src="{{ asset('assets/images/fleche_droite.png') }}" alt="fleche droite"/>
         </div>
 
