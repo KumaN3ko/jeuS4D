@@ -35,6 +35,38 @@ class PartieController extends AbstractController
 
         $perdu = $this->getUser()->getPerdu();
 
+        $total = $gagne + $perdu;
+
+        $ratio = ($gagne / $total)*100;
+
+        if ($ratio >= 0 && $ratio < 10) {
+            $image = 1;
+        }
+        elseif ($ratio >= 10  && $ratio < 20) {
+            $image = 2;
+        }
+        elseif ($ratio >= 20  && $ratio < 30) {
+            $image = 3;
+        }
+        elseif ($ratio >= 30  && $ratio < 40) {
+            $image = 4;
+        }
+        elseif ($ratio >= 50  && $ratio < 60) {
+            $image = 5;
+        }
+        elseif ($ratio >= 60  && $ratio < 70) {
+            $image = 6;
+        }
+        elseif ($ratio >= 70  && $ratio < 80) {
+            $image = 7;
+        }
+        elseif ($ratio >= 80  && $ratio < 90) {
+            $image = 8;
+        }
+        elseif ($ratio >= 90  && $ratio <= 100) {
+            $image = 9;
+        }
+
         $role = $this->getUser()->getRoles();
 
 
@@ -47,7 +79,9 @@ class PartieController extends AbstractController
             'joueurco' => $joueurco,
             'mail' => $mail,
             'role' => $role[0],
-
+            'ratio' => $ratio,
+            'image' => $image,
+            'total' => $total,
 
         ]);
     }

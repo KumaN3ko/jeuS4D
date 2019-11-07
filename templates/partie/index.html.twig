@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block body %}
+    {{ ratio }}
     <div class="container">
 
 
@@ -41,7 +42,13 @@
                     <span class="nbparties">Nombre de parties jouées : {{ perdu + gagne }}</span>
                 </div>
                 <div class="row infosl2">
-                    <img src="{{ asset('assets/images/jeu_bebe.png') }}" alt="image de bébé" class="infos_img"/>
+
+                    {% if total < 5 %}
+                        <img src="{{ asset('assets/images/perso1.png') }}" alt="image de bébé" class="infos_img"/>
+                        {% else %}
+                        <img src="{{ asset('assets/images/') }}perso{{ image }}.png">
+                    {% endif %}
+                    
                     <div class="stats">
                         <div class="row stats1">
                             <span class="winloss">Victoires</span>

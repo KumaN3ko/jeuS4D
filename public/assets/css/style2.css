@@ -186,7 +186,6 @@ header{
     position:relative;
 }
 .infos_img{
-    border: solid 2px black;
     border-radius: 20px;
 }
 .winloss{
